@@ -4,6 +4,7 @@ services:
     build: ${PATH_API_HOST}
     volumes:
       - ${PATH_API_HOST}:${APP_PATH_CONTAINER}
+      - ${APP_PATH_CONTAINER}/node_modules
     ports:
       - "3000:3000"
     networks:
@@ -19,7 +20,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - mysql:/var/lib/mysql
-      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      #- ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - api
 networks:

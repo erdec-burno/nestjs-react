@@ -21,6 +21,7 @@ import { UsersModule } from './users/users.module';
       database: process.env.DB_DATABASE,
       entities: [User],
       synchronize: true,
+      autoLoadEntities: true,
     }),
     UsersModule
   ],

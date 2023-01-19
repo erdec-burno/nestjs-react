@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Res } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
+import { Response } from 'express';
 
 @ApiTags("Users")
 @Controller('users')
@@ -14,6 +15,18 @@ export class UsersController {
   findAll() {
     return this.usersService.findAll();
   }
+  
+  @ApiOperation({ summary: "Get user by ID"})
+  @ApiResponse({status: 200, type: [User]})
+  @Get(':id')
+  async findOne(@Param('id') id: number, @Res() res: Response) {
+    const result = await this.usersService.findOne(id);
+    if (!result) {
+      res.status(HttpStatus.NOT_FOUND).json({});
+    } else {
+      res.status(HttpStatus.OK).json(result);
+    }
+  }
 
   @ApiOperation({ summary: "Create user"})
   @ApiResponse({status: 200, type: User})
@@ -21,4 +34,17 @@ export class UsersController {
   create(@Body() body: User) {
     return this.usersService.create(body);
   }
+  
+  @ApiOperation({ summary: "Remove user"})
+  @ApiResponse({status: 200, type: String})
+  @Delete(':id')
+  async remove(@Param('id') id: string, @Res() res: Response) {
+    const result = await this.usersService.remove(id);
+    if (!result) {
+      res.status(HttpStatus.NOT_FOUND).json({ message: "Not found", result: result});
+    } else {
+      res.status(HttpStatus.OK).json({ message: "success", result: result});
+    }
+  }
+
 }
