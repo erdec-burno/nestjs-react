@@ -13,3 +13,12 @@ $ npm install
 ```bash
 $ docker-compose up
 ```
+
+# generate migration
+```bash
+$ npm run typeorm migration:generate -- -d data-source.ts path/migrationName
+```
+
+```bash
+$ npm run typeorm migration:run -- -d data-source.ts
+```

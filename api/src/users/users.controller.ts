@@ -1,8 +1,9 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Res } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { User } from './user.entity';
+import { User } from '../db/entity/user.entity';
 import { UsersService } from './users.service';
 import { Response } from 'express';
+import { UserDto } from './dto/user.dto';
 
 @ApiTags("Users")
 @Controller('users')
@@ -10,14 +11,14 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
   
   @ApiOperation({ summary: "Get users"})
-  @ApiResponse({status: 200, type: [User]})
+  @ApiResponse({status: 200, type: [UserDto]})
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
   
   @ApiOperation({ summary: "Get user by ID"})
-  @ApiResponse({status: 200, type: [User]})
+  @ApiResponse({status: 200, type: UserDto})
   @Get(':id')
   async findOne(@Param('id') id: number, @Res() res: Response) {
     const result = await this.usersService.findOne(id);
@@ -29,7 +30,7 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: "Create user"})
-  @ApiResponse({status: 200, type: User})
+  @ApiResponse({status: 200, type: UserDto})
   @Post()
   create(@Body() body: User) {
     return this.usersService.create(body);
