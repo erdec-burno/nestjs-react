@@ -8,7 +8,7 @@ import { PostDto } from './dto/post.dto';
 export class PostService {
   constructor(
     @InjectRepository(Post)
-    private postsRepository: Repository<Post>
+    private postsRepository: Repository<Post>,
   ) {}
   async create(body: PostDto): Promise<Post> {
     const post = await this.postsRepository.save(body);
@@ -21,7 +21,7 @@ export class PostService {
 
   async findOne(id: number) {
     const result = await this.postsRepository.findOneBy({ id });
-    if (typeof result === "object") {
+    if (typeof result === 'object') {
       return result;
     }
   }

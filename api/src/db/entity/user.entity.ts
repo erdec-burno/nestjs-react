@@ -1,7 +1,7 @@
 import { Post } from './post.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
-@Entity({ name: "users"})
+@Entity({ name: 'users' })
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -16,5 +16,5 @@ export class User {
   isActive: boolean;
 
   @OneToMany(() => Post, (post) => post.user)
-    posts: Post[]
+  posts: Post[];
 }
