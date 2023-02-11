@@ -8,7 +8,7 @@ const AppDataSource = new DataSource({
     username: "sample",
     password: "sample",
     database: "sample",
-    synchronize: false,
+    synchronize: true,
     logging: false,
     entities: ["src/db/entity/*{.ts,.js}"],
     migrations: ["src/db/migrations/*{.ts,.js}"],

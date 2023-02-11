@@ -4,6 +4,7 @@ import { User } from '../db/entity/user.entity';
 import { UsersService } from './users.service';
 import { Response } from 'express';
 import { UserDto } from './dto/user.dto';
+import { PostDto } from 'src/post/dto/post.dto';
 
 @ApiTags("Users")
 @Controller('users')
@@ -48,4 +49,10 @@ export class UsersController {
     }
   }
 
+  @ApiOperation({ summary: "Create user post"})
+  @ApiResponse({status: 200, type: PostDto})
+  @Post(':id/posts')
+  createPost(@Param('id') id: number, @Body() body: PostDto) {
+    return this.usersService.createUserPost(id, body);
+  }
 }

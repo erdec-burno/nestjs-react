@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import { User } from "./user.entity";
 
-@Entity()
+@Entity({ name: 'posts'})
 export class Task {
     @PrimaryGeneratedColumn()
     id: string;
