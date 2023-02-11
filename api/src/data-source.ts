@@ -10,7 +10,7 @@ const AppDataSource = new DataSource({
     database: "sample",
     synchronize: false,
     logging: false,
-    entities: ["src/entity/*{.ts,.js}"],
+    entities: ["src/db/entity/*{.ts,.js}"],
     migrations: ["src/db/migrations/*{.ts,.js}"],
     subscribers: [],
 })
