@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { PostModule } from './post/post.module';
+import { FileService } from './services/file/file.service';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { PostModule } from './post/post.module';
     PostModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, FileService],
 })
 export class AppModule {
   //constructor(private dataSource: DataSource) {}

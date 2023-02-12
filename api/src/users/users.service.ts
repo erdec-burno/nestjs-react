@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, createQueryBuilder } from 'typeorm';
 import { Post } from 'src/db/entity/post.entity';
 import { User } from '../db/entity/user.entity';
 import { PostDto } from 'src/post/dto/post.dto';
@@ -18,11 +18,15 @@ export class UsersService {
     return user;
   }
 
-  findAll(): Promise<User[]> {
-    return this.usersRepository.find({ relations: ['posts'] });
+  findAll(): Promise<UserDto[]> {
+    // return this.usersRepository.find({ relations: ['posts'] }); // lucreaza asemenea
+    return this.usersRepository
+      .createQueryBuilder('users')
+      .leftJoinAndSelect('users.posts', 'posts')
+      .getMany();
   }
 
-  async findOne(id: number): Promise<User> {
+  async findOne(id: number): Promise<UserDto> {
     const result = await this.usersRepository.findOneBy({ id });
     if (typeof result === 'object') {
       return result;
