@@ -12,7 +12,6 @@ import {
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PostService } from './post.service';
 import { PostDto } from './dto/post.dto';
-import { Post as Posts } from 'src/db/entity/post.entity';
 import { Response } from 'express';
 
 @ApiTags('Posts')

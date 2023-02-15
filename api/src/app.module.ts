@@ -21,7 +21,7 @@ import { FileService } from './services/file/file.service';
       database: process.env.DB_DATABASE,
       entities: ['dist/db/entity/*.ts'],
       migrations: ['dist/db/migrations/*.ts'],
-      synchronize: true,
+      // synchronize: true,
       autoLoadEntities: true,
     }),
     UsersModule,
